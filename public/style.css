@@ -1,107 +1,21 @@
-:root {
-  --bg: #fbf7ec;
-  --paper: #fffdf6;
-  --ink: #2d2a24;
-  --muted: #7a7363;
-  --line: #e8dfc8;
-  --accent: #e0a526;
-  --accent-dark: #b9841a;
-  --note: #fff3b8;
-  --radius: 12px;
-}
-
 * { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font: 16px/1.55 "Nunito", system-ui, sans-serif;
-  color: var(--ink);
-  background-color: var(--bg);
-  background-image: radial-gradient(#e9dfc4 1px, transparent 1px);
-  background-size: 22px 22px;
-}
-
-main {
-  max-width: 38rem;
-  margin: 3rem auto;
-  padding: 2rem 2rem 2.5rem;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: 0 12px 30px rgba(80, 60, 20, .08);
-}
-
-h1 { margin: 0; font-size: 2.3rem; font-weight: 800; letter-spacing: -.01em; }
-h1::after {
-  content: "";
-  display: block;
-  width: 3rem; height: 5px;
-  margin-top: .4rem;
-  border-radius: 3px;
-  background: var(--accent);
-}
-main > p { color: var(--muted); margin: .8rem 0 1.5rem; }
-h2 {
-  margin: 1.6rem 0 .5rem;
-  font-size: .8rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--muted);
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: .7rem .9rem;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  font: inherit;
-  color: var(--ink);
-  background: #fff;
-}
-input[type="text"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px #fbecc4; }
-
-button {
-  margin-top: .6rem;
-  padding: .6rem 1.2rem;
-  border: 0;
-  border-radius: 10px;
-  font: 700 .95rem "Nunito", system-ui, sans-serif;
-  color: #2d2a24;
-  background: var(--accent);
-  cursor: pointer;
-}
-button:hover { background: #ebb43a; }
-
-ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  gap: .9rem;
-  margin: 1.2rem 0 0;
-  padding-left: 0;
-  list-style: none;
-}
-li {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: .6rem;
-  min-height: 7rem;
-  padding: .9rem 1rem;
-  background: var(--note);
-  border-radius: 4px 4px 14px 4px;
-  box-shadow: 0 4px 10px rgba(120, 90, 20, .12);
-}
-li:nth-child(3n+2) { background: #ffe0e6; }
-li:nth-child(3n) { background: #dff3e4; }
-li span { font-weight: 700; word-break: break-word; }
-li button {
-  align-self: flex-start;
-  margin: 0;
-  padding: .3rem .8rem;
-  font-size: .8rem;
-  background: rgba(255, 255, 255, .7);
-  border: 1px solid rgba(0, 0, 0, .08);
-}
-li button:hover { background: #fff; }
+body { margin: 0; font: 16px/1.5 system-ui, sans-serif; background: #f3f5fa; color: #1c2230; }
+.top { padding: 24px 16px 8px; max-width: 720px; margin: 0 auto; }
+.top h1 { margin: 0; }
+.tag { margin: 4px 0 0; color: #566; }
+main { max-width: 720px; margin: 0 auto; padding: 8px 16px 48px; display: grid; gap: 16px; }
+.card { background: #fff; border: 1px solid #dfe3ee; border-radius: 10px; padding: 16px; }
+.card h2 { margin: 0 0 12px; font-size: 18px; }
+form { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; }
+label { display: grid; gap: 4px; font-size: 14px; }
+input, button { font: inherit; padding: 8px 10px; border: 1px solid #c4cad9; border-radius: 6px; background: #fff; }
+button { cursor: pointer; background: #3b5bdb; color: #fff; border-color: #3b5bdb; }
+button.plain { background: #fff; color: #1c2230; border-color: #c4cad9; }
+.msg { margin: 8px 0 0; font-size: 14px; color: #566; }
+.tools { display: flex; gap: 8px; }
+.tools input { flex: 1; }
+.notes { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+.note { border: 1px solid #dfe3ee; border-radius: 8px; padding: 10px 12px; display: grid; gap: 6px; }
+.note .name { font-weight: 600; }
+.pinned-label { font-size: 12px; background: #ffe8a3; border-radius: 999px; padding: 2px 8px; margin-left: 6px; }
+.row { display: flex; gap: 8px; }

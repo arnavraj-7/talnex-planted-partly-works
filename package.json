@@ -1,9 +1,0 @@
-{
-  "name": "talnex-partly-works",
-  "version": "1.0.0",
-  "private": true,
-  "description": "A planted test app for TalNex: add and search work, pin does nothing, an empty title crashes the page.",
-  "scripts": {
-    "test": "node --test"
-  }
-}

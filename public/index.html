@@ -3,62 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NoteBox</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
+  <title>NoteBox - quick notes</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <main id="root">
+  <header class="top">
     <h1>NoteBox</h1>
-    <p>Keep short notes. Add them, search them, pin them.</p>
-    <h2>Add note</h2>
-    <input id="title" type="text" placeholder="Note title" aria-label="Note title">
-    <button id="add" type="button">Add note</button>
-    <h2>Search notes</h2>
-    <input id="search" type="text" placeholder="Search notes" aria-label="Search notes">
-    <ul id="list"></ul>
+    <p class="tag">Write short notes, pin the important ones and find them again.</p>
+  </header>
+  <main>
+    <section class="card">
+      <h2>New note</h2>
+      <form id="add-form">
+        <label>Title <input id="title" type="text" placeholder="Title"></label>
+        <label>Note <input id="body" type="text" placeholder="Write something"></label>
+        <button type="submit" id="add-btn">Add note</button>
+      </form>
+      <p id="msg" class="msg" role="status"></p>
+    </section>
+    <section class="card">
+      <h2>Your notes</h2>
+      <div class="tools">
+        <input id="search" type="search" placeholder="Search notes" aria-label="Search notes">
+        <button type="button" id="pdf-btn" hidden>Export PDF</button>
+      </div>
+      <p id="count" class="msg"></p>
+      <ul id="notes" class="notes"></ul>
+      <p id="empty" class="msg" hidden>No notes yet.</p>
+    </section>
   </main>
-  <script src="/notes.js"></script>
-  <script>
-    let notes = [];
-    try { notes = JSON.parse(localStorage.getItem("notebox_notes") || "[]"); } catch (e) { notes = []; }
-    const list = document.getElementById("list");
-
-    function save() { try { localStorage.setItem("notebox_notes", JSON.stringify(notes)); } catch (e) {} }
-
-    function render() {
-      const shown = NoteBox.searchNotes(notes, document.getElementById("search").value);
-      list.innerHTML = "";
-      shown.forEach((n) => {
-        const li = document.createElement("li");
-        const span = document.createElement("span");
-        span.textContent = n.title;
-        li.appendChild(span);
-        const pin = document.createElement("button");
-        pin.type = "button";
-        pin.textContent = "Pin";
-        // Wired to nothing: the click does nothing at all.
-        pin.addEventListener("click", function () {});
-        li.appendChild(pin);
-        list.appendChild(li);
-      });
-    }
-
-    document.getElementById("add").addEventListener("click", function () {
-      try {
-        notes = NoteBox.addNote(notes, document.getElementById("title").value);
-        document.getElementById("title").value = "";
-        save();
-        render();
-      } catch (e) {
-        // Bad input crashes the whole page instead of showing a friendly message.
-        document.body.innerHTML = "<p>Something went wrong. Please reload.</p>";
-      }
-    });
-    document.getElementById("search").addEventListener("input", render);
-    render();
-  </script>
+  <script src="/app.js"></script>
 </body>
 </html>
