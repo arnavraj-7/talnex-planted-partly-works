@@ -1,6 +1,6 @@
 # NoteBox
 
-A small notes page. Everything runs in the browser and your notes stay on your device.
+A small notes page.
 
 ## What it does
 
