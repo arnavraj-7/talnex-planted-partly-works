@@ -36,7 +36,7 @@ function render() {
   const shown = state.notes.filter((n) => !q || n.title.toLowerCase().includes(q) || n.body.toLowerCase().includes(q));
   for (const n of shown) list.appendChild(editing === n.id ? editRow(n) : noteRow(n));
   $("empty").hidden = shown.length > 0;
-  $("count").textContent = `${shownCount} note${shownCount === 1 ? "" : "s"}`;
+  $("count").textContent = `${shown.length} note${shown.length === 1 ? "" : "s"}`;
 }
 
 function noteRow(n) {
