@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NoteBox</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main id="root">
+    <h1>NoteBox</h1>
+    <p>Keep short notes. Add them, search them, pin them.</p>
+    <h2>Add note</h2>
+    <input id="title" type="text" placeholder="Note title" aria-label="Note title">
+    <button id="add" type="button">Add note</button>
+    <h2>Search notes</h2>
+    <input id="search" type="text" placeholder="Search notes" aria-label="Search notes">
+    <ul id="list"></ul>
+  </main>
+  <script src="/notes.js"></script>
+  <script>
+    let notes = [];
+    try { notes = JSON.parse(localStorage.getItem("notebox_notes") || "[]"); } catch (e) { notes = []; }
+    const list = document.getElementById("list");
+
+    function save() { try { localStorage.setItem("notebox_notes", JSON.stringify(notes)); } catch (e) {} }
+
+    function render() {
+      const shown = NoteBox.searchNotes(notes, document.getElementById("search").value);
+      list.innerHTML = "";
+      shown.forEach((n) => {
+        const li = document.createElement("li");
+        const span = document.createElement("span");
+        span.textContent = n.title;
+        li.appendChild(span);
+        const pin = document.createElement("button");
+        pin.type = "button";
+        pin.textContent = "Pin";
+        // Wired to nothing: the click does nothing at all.
+        pin.addEventListener("click", function () {});
+        li.appendChild(pin);
+        list.appendChild(li);
+      });
+    }
+
+    document.getElementById("add").addEventListener("click", function () {
+      try {
+        notes = NoteBox.addNote(notes, document.getElementById("title").value);
+        document.getElementById("title").value = "";
+        save();
+        render();
+      } catch (e) {
+        // Bad input crashes the whole page instead of showing a friendly message.
+        document.body.innerHTML = "<p>Something went wrong. Please reload.</p>";
+      }
+    });
+    document.getElementById("search").addEventListener("input", render);
+    render();
+  </script>
+</body>
+</html>
